@@ -1,0 +1,88 @@
+<div *ngIf="aberto" class="modal-overlay" (click)="fecharModal()">
+  <div class="modal-conteudo" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>{{ tipo === 'credito' ? 'Editar Cartão de Crédito' : 'Editar Conta/Débito' }}</h3>
+      <button class="btn-fechar" (click)="fecharModal()">&times;</button>
+    </div>
+    
+    <div class="modal-body" *ngIf="itemEditavel">
+      <!-- Seletor de Cor -->
+      <div class="form-group">
+        <label>Cor de Destaque</label>
+        <div class="seletor-cores">
+          <div 
+            *ngFor="let cor of coresPredefinidas" 
+            class="cor-opcao"
+            [style.background-color]="cor.valor"
+            [class.selecionada]="corSelecionada === cor.valor"
+            (click)="selecionarCor(cor.valor)"
+            [title]="cor.nome"
+          >
+            <i *ngIf="corSelecionada === cor.valor" class="fas fa-check"></i>
+          </div>
+          <div 
+            class="cor-opcao outras"
+            [class.selecionada]="mostrarSeletorCor"
+            (click)="abrirSeletorCor()"
+            title="Outras cores"
+          >
+            <i class="fas fa-palette"></i>
+          </div>
+        </div>
+        
+        <div *ngIf="mostrarSeletorCor" class="seletor-cor-custom">
+          <input 
+            type="color" 
+            [value]="corSelecionada"
+            (input)="atualizarCorCustomizada($event)"
+            class="input-cor"
+          />
+          <span class="cor-hex">{{ corSelecionada }}</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Nome</label>
+        <input 
+          type="text" 
+          [(ngModel)]="itemEditavel.nome" 
+          class="input-field"
+          placeholder="Nome do {{ tipo === 'credito' ? 'cartão' : 'conta' }}"
+        />
+      </div>
+
+      <div class="form-group" *ngIf="tipo === 'credito'">
+        <label>Limite</label>
+        <input 
+          type="number" 
+          [(ngModel)]="itemEditavel.limite" 
+          class="input-field"
+          placeholder="Limite do cartão"
+        />
+      </div>
+
+      <div class="form-group" *ngIf="tipo === 'debito'">
+        <label>Tipo</label>
+        <select [(ngModel)]="itemEditavel.tipo" class="input-field">
+          <option value="debito">Débito</option>
+          <option value="conta">Conta Corrente</option>
+        </select>
+      </div>
+
+      <div class="form-group" *ngIf="tipo === 'debito'">
+        <label>Saldo</label>
+        <input 
+          type="number" 
+          [(ngModel)]="itemEditavel.saldo" 
+          class="input-field"
+          placeholder="Saldo atual"
+        />
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button (click)="fecharModal()" class="btn-cancelar">Cancelar</button>
+      <button (click)="salvarEdicao()" class="btn-salvar">Salvar</button>
+    </div>
+  </div>
+</div>

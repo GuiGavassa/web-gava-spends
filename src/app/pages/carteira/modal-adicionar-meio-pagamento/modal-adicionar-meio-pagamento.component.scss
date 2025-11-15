@@ -1,0 +1,228 @@
+// Modal de Adição
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-conteudo {
+    background-color: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+
+    h3 {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 1.3em;
+    }
+
+    .btn-fechar {
+        background: none;
+        border: none;
+        font-size: 2em;
+        color: #7f8c8d;
+        cursor: pointer;
+        line-height: 1;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s;
+
+        &:hover {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+        }
+    }
+}
+
+.modal-body {
+    padding: 20px;
+
+    .form-group {
+        margin-bottom: 15px;
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #34495e;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+    }
+}
+
+.input-field {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    width: 100%;
+
+    &:focus {
+        outline: none;
+        border-color: #2c3e50;
+    }
+}
+
+.seletor-cores {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.cor-opcao {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    &.selecionada {
+        border-color: #2c3e50;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    &.outras {
+        background: linear-gradient(135deg, 
+            #ff0000 0%, 
+            #ffff00 25%, 
+            #00ff00 50%, 
+            #00ffff 75%, 
+            #0000ff 100%);
+        position: relative;
+        
+        &::after {
+            content: '+';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    }
+}
+
+.seletor-cor-custom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+
+    input[type="color"] {
+        width: 60px;
+        height: 40px;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .cor-hex {
+        font-family: monospace;
+        font-size: 14px;
+        color: #7f8c8d;
+        background-color: #f8f9fa;
+        padding: 8px 12px;
+        border-radius: 4px;
+    }
+
+    .cor-preview {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 2px solid #ddd;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+
+    .btn-cancelar {
+        padding: 10px 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: white;
+        color: #7f8c8d;
+        cursor: pointer;
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        transition: all 0.3s;
+
+        &:hover {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+        }
+    }
+
+    .btn-salvar {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #27ae60;
+        color: white;
+        cursor: pointer;
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        transition: all 0.3s;
+
+        &:hover {
+            background-color: #229954;
+        }
+    }
+}
