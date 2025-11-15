@@ -1,0 +1,21 @@
+<div class="secao-pagamentos">
+  <h2>{{ icone }} {{ titulo }}</h2>
+  <p class="secao-descricao">{{ descricao }}</p>
+  
+  <button (click)="onAdicionar()" class="btn-adicionar-novo">
+    <i class="fas fa-plus"></i> {{ textoBotao }}
+  </button>
+
+  <div class="lista-itens">
+    <app-item-meio-pagamento 
+      *ngFor="let item of items" 
+      [item]="item"
+      (editar)="onEditar($event)"
+      (remover)="onRemover($event)"
+    ></app-item-meio-pagamento>
+  </div>
+
+  <div *ngIf="items.length === 0" class="lista-vazia">
+    {{ mensagemVazia }}
+  </div>
+</div>

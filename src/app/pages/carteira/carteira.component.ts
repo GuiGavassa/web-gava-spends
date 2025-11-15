@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ModalAdicionarMeioPagamentoComponent } from './modal-adicionar-meio-pagamento/modal-adicionar-meio-pagamento.component';
 import { ModalEditarMeioPagamentoComponent } from './modal-editar-meio-pagamento/modal-editar-meio-pagamento.component';
+import { ResumoFinanceiroComponent } from './components/resumo-financeiro/resumo-financeiro.component';
+import { ListaMeiosPagamentoComponent } from './components/lista-meios-pagamento/lista-meios-pagamento.component';
 
 interface MeioPagamento {
   id: number;
@@ -16,7 +18,14 @@ interface MeioPagamento {
 
 @Component({
   selector: 'app-carteira',
-  imports: [CommonModule, FormsModule, ModalAdicionarMeioPagamentoComponent, ModalEditarMeioPagamentoComponent],
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    ModalAdicionarMeioPagamentoComponent, 
+    ModalEditarMeioPagamentoComponent,
+    ResumoFinanceiroComponent,
+    ListaMeiosPagamentoComponent
+  ],
   templateUrl: './carteira.component.html',
   styleUrl: './carteira.component.scss'
 })

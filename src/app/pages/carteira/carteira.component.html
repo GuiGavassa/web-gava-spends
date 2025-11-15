@@ -2,88 +2,36 @@
     <h1>💼 Minha Carteira</h1>
     
     <!-- Resumo Financeiro -->
-    <div class="resumo-financeiro">
-      <div class="resumo-item">
-        <span class="resumo-label">Limite Total (Crédito):</span>
-        <span class="resumo-valor credito">R$ {{ totalLimiteCredito | number:'1.2-2' }}</span>
-      </div>
-      <div class="resumo-item destaque">
-        <span class="resumo-label">Saldo Total (Contas):</span>
-        <span class="resumo-valor saldo">R$ {{ totalSaldoContas | number:'1.2-2' }}</span>
-      </div>
-    </div>
+    <app-resumo-financeiro
+      [totalLimiteCredito]="totalLimiteCredito"
+      [totalSaldoContas]="totalSaldoContas"
+    ></app-resumo-financeiro>
 
     <!-- Container para as duas seções lado a lado -->
     <div class="secoes-container">
       <!-- Seção: Cartões de Crédito -->
-      <div class="secao-pagamentos">
-      <h2>💳 Cartões de Crédito</h2>
-      <p class="secao-descricao">Cartões onde você paga a fatura mensalmente</p>
-      
-      <button (click)="abrirModalAdicionarCredito()" class="btn-adicionar-novo">
-        <i class="fas fa-plus"></i> Adicionar Cartão
-      </button>
+      <app-lista-meios-pagamento
+        titulo="💳 Cartões de Crédito"
+        descricao="Cartões onde você paga a fatura mensalmente"
+        textoBotao="Adicionar Cartão"
+        [items]="cartoesCredito"
+        mensagemVazia="Nenhum cartão de crédito cadastrado."
+        (adicionar)="abrirModalAdicionarCredito()"
+        (editar)="editarCartaoCredito($event)"
+        (remover)="removerCartaoCredito($event)"
+      ></app-lista-meios-pagamento>
 
-      <div class="lista-itens">
-        <div *ngFor="let cartao of cartoesCredito" class="item" [style.border-left]="'4px solid ' + (cartao.cor || '#3498db')">
-          <div class="item-visualizar">
-            <div class="item-cor-indicator" [style.background-color]="cartao.cor || '#3498db'"></div>
-            <div class="item-info">
-              <span class="item-nome">{{ cartao.nome }}</span>
-              <span class="item-tipo">Crédito</span>
-              <span class="item-valor">Limite: R$ {{ cartao.limite | number:'1.2-2' }}</span>
-            </div>
-            <div class="item-acoes">
-                <button (click)="editarCartaoCredito(cartao)" class="btn-editar" title="Editar">
-                  <i class="fas fa-edit"></i>
-                </button>
-                <button (click)="removerCartaoCredito(cartao.id)" class="btn-remover" title="Remover">
-                  <i class="fas fa-trash"></i>
-                </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div *ngIf="cartoesCredito.length === 0" class="lista-vazia">
-        Nenhum cartão de crédito cadastrado.
-      </div>
-    </div>
-
-    <!-- Seção: Contas e Cartões de Débito -->
-    <div class="secao-pagamentos">
-      <h2>🏦 Contas Bancárias / Débito</h2>
-      <p class="secao-descricao">Contas correntes, poupança ou cartões de débito</p>
-      
-      <button (click)="abrirModalAdicionarDebito()" class="btn-adicionar-novo">
-        <i class="fas fa-plus"></i> Adicionar Conta
-      </button>
-
-      <div class="lista-itens">
-        <div *ngFor="let conta of contasDebito" class="item" [style.border-left]="'4px solid ' + (conta.cor || '#27ae60')">
-          <div class="item-visualizar">
-            <div class="item-cor-indicator" [style.background-color]="conta.cor || '#27ae60'"></div>
-            <div class="item-info">
-              <span class="item-nome">{{ conta.nome }}</span>
-              <span class="item-tipo">{{ conta.tipo === 'debito' ? 'Débito' : 'Conta Corrente' }}</span>
-            </div>
-            <span class="item-valor">Saldo: R$ {{ conta.saldo | number:'1.2-2' }}</span>
-            <div class="item-acoes">
-              <button (click)="editarContaDebito(conta)" class="btn-editar" title="Editar">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button (click)="removerContaDebito(conta.id)" class="btn-remover" title="Remover">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div *ngIf="contasDebito.length === 0" class="lista-vazia">
-        Nenhuma conta ou cartão de débito cadastrado.
-      </div>
-    </div>
+      <!-- Seção: Contas e Cartões de Débito -->
+      <app-lista-meios-pagamento
+        titulo="🏦 Contas Bancárias / Débito"
+        descricao="Contas correntes, poupança ou cartões de débito"
+        textoBotao="Adicionar Conta"
+        [items]="contasDebito"
+        mensagemVazia="Nenhuma conta ou cartão de débito cadastrado."
+        (adicionar)="abrirModalAdicionarDebito()"
+        (editar)="editarContaDebito($event)"
+        (remover)="removerContaDebito($event)"
+      ></app-lista-meios-pagamento>
     </div>
 
     <!-- Modal de Edição -->

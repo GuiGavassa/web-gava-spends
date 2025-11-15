@@ -1,0 +1,18 @@
+<div class="item" [style.border-left]="'4px solid ' + (item.cor || corPadrao)">
+  <div class="item-visualizar">
+    <div class="item-cor-indicator" [style.background-color]="item.cor || corPadrao"></div>
+    <div class="item-info">
+      <span class="item-nome">{{ item.nome }}</span>
+      <span class="item-tipo">{{ tipoLabel }}</span>
+      <span class="item-valor">{{ valorLabel }}</span>
+    </div>
+    <div class="item-acoes">
+      <button (click)="onEditar()" class="btn-editar" title="Editar">
+        <i class="fas fa-edit"></i>
+      </button>
+      <button (click)="onRemover()" class="btn-remover" title="Remover">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  </div>
+</div>
